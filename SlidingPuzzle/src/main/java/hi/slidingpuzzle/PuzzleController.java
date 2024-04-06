@@ -74,13 +74,12 @@ public class PuzzleController {
     }
 
     public void lagaGrid(int gridSize) {
-        Mynd.getChildren().clear(); // Clear existing content
-        Mynd.getColumnConstraints().clear(); // Clear existing column constraints
-        Mynd.getRowConstraints().clear(); // Clear existing row constraints
+        Mynd.getChildren().clear();
+        Mynd.getColumnConstraints().clear();
+        Mynd.getRowConstraints().clear();
 
-        double cellSize = 300.0 / gridSize; // Calculate cell size
+        double cellSize = 300.0 / gridSize;
 
-        // Configure new column and row constraints for the GridPane
         for (int i = 0; i < gridSize; i++) {
             ColumnConstraints columnConstraints = new ColumnConstraints(cellSize);
             RowConstraints rowConstraints = new RowConstraints(cellSize);
