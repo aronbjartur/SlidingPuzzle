@@ -5,7 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -47,47 +47,53 @@ public class PuzzleController {
         });
     }
 
+    private Image selectedImage = null; // Class level variable
+
     private void valinnListi(String item) {
-        String imagePath = null;
-        if ("Kirkjufell".equals(item)) {
-            imagePath = "Myndir/kirkjufell.png";
-        } else if ("Gleym mér ei".equals(item)) {
-            imagePath = "Myndir/gleym_mer_ei.png";
-        } else if ("Zebra".equals(item)) {
-            imagePath = "Myndir/zebra.png";
-        }
+        String imagePath = switch (item) {
+            case "Kirkjufell" -> "Myndir/kirkjufell.png";
+            case "Gleym mér ei" -> "Myndir/gleym_mer_ei.png";
+            case "Zebra" -> "Myndir/zebra.png";
+            default -> null;
+        };
 
         if (imagePath != null) {
-            Image image = new Image(getClass().getResourceAsStream(imagePath));
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight(300);
-            imageView.setFitWidth(300);
-            imageView.setPreserveRatio(true);
-
-            Mynd.getChildren().clear();
-            GridPane.setColumnSpan(imageView, 3);
-            GridPane.setRowSpan(imageView, 3);
-            Mynd.add(imageView, 0, 0);
-
+            selectedImage = new Image(getClass().getResourceAsStream(imagePath));
             myndHeiti.setText(item);
+            lagaGrid(3); // má taka þetta út seinna
         }
     }
+
+
 
     public void lagaGrid(int gridSize) {
         Mynd.getChildren().clear();
         Mynd.getColumnConstraints().clear();
         Mynd.getRowConstraints().clear();
 
-        double cellSize = 300.0 / gridSize;
+        double heildarStaerd = 300.0;
+        double tileWidth = heildarStaerd / gridSize;
+        double tileHeight = heildarStaerd / gridSize;
+
 
         for (int i = 0; i < gridSize; i++) {
-            ColumnConstraints columnConstraints = new ColumnConstraints(cellSize);
-            RowConstraints rowConstraints = new RowConstraints(cellSize);
+            Mynd.getColumnConstraints().add(new ColumnConstraints(tileWidth));
+            Mynd.getRowConstraints().add(new RowConstraints(tileHeight));
+        }
 
-            Mynd.getColumnConstraints().add(columnConstraints);
-            Mynd.getRowConstraints().add(rowConstraints);
+        for (int y = 0; y < gridSize; y++) {
+            for (int x = 0; x < gridSize; x++) {
+                boolean isBlank = (x == gridSize - 1) && (y == gridSize - 1);
+                Image tileImage = isBlank ? null : new WritableImage(selectedImage.getPixelReader(), (int) (x * tileWidth), (int) (y * tileHeight), (int) tileWidth, (int) tileHeight);
+                Tile tile = new Tile(tileImage, isBlank, x, y, tileWidth, tileHeight);
+                Mynd.add(tile, x, y);
+            }
         }
     }
+
+
+
+
 
 
 
