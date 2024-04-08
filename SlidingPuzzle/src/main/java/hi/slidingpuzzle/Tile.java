@@ -38,7 +38,7 @@ public class Tile extends Pane {
         setOnMouseClicked(event -> trySwap());
     }
 
-    private void trySwap() {
+    public void trySwap() {
         if (this.isBlank || !isAdjacentToBlank()) return;
 
         Image tempImage = this.imageView.getImage();

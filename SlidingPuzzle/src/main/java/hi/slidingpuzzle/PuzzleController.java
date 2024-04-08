@@ -12,8 +12,11 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import vinnsla.Difficulty;
 
+import java.util.Random;
+
 public class PuzzleController {
     private int erfidleika;
+    private Tile[][] tiles;
     @FXML
     private ListView<String> Listi;
 
@@ -70,6 +73,7 @@ public class PuzzleController {
         double heildarStaerd = 300.0;
         double tileWidth = heildarStaerd / gridSize;
         double tileHeight = heildarStaerd / gridSize;
+        tiles=new Tile[gridSize][gridSize];
 
 
         for (int i = 0; i < gridSize; i++) {
@@ -83,7 +87,14 @@ public class PuzzleController {
                 Image tileImage = isBlank ? null : new WritableImage(selectedImage.getPixelReader(), (int) (x * tileWidth), (int) (y * tileHeight), (int) tileWidth, (int) tileHeight);
                 Tile tile = new Tile(tileImage, isBlank, x, y, tileWidth, tileHeight);
                 Mynd.add(tile, x, y);
+                tiles[x][y]=tile;
             }
+        }
+        Random rand = new Random();
+        for(int i = 0; i < 10000; i++){
+            int x = rand.nextInt(gridSize);
+            int y = rand.nextInt(gridSize);
+            tiles[x][y].trySwap();
         }
     }
 
