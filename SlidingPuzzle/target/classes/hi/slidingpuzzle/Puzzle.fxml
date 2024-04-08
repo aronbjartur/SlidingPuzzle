@@ -29,9 +29,5 @@
                 <ListView fx:id="Listi" prefHeight="400.0" prefWidth="150.0" />
             </children>
         </VBox>
-        <!-- Buttons for changing grid size -->
-        <Button text="3x3" onAction="#grid3x3" layoutX="10" layoutY="380" />
-        <Button text="4x4" onAction="#grid4x4" layoutX="60" layoutY="380" />
-        <Button text="5x5" onAction="#grid5x5" layoutX="110" layoutY="380" />
     </children>
 </Pane>

@@ -22,8 +22,12 @@ public class Tile extends Pane {
         setPrefSize(tileWidth, tileHeight);
 
         if (isBlank) {
-            setBackground(new Background(new BackgroundFill(Color.GRAY, CornerRadii.EMPTY, Insets.EMPTY)));
+            imageView = new ImageView(image);
+            imageView.setFitWidth(tileWidth);
+            imageView.setFitHeight(tileHeight);
+            getChildren().add(imageView);
             blankTile = this;
+
         } else {
             imageView = new ImageView(image);
             imageView.setFitWidth(tileWidth);

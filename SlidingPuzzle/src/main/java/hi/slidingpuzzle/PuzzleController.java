@@ -1,6 +1,7 @@
 package hi.slidingpuzzle;
 
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -9,9 +10,10 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import vinnsla.Difficulty;
 
 public class PuzzleController {
-
+    private int erfidleika;
     @FXML
     private ListView<String> Listi;
 
@@ -20,22 +22,6 @@ public class PuzzleController {
 
     @FXML
     private Label myndHeiti;
-
-    @FXML
-    private void grid3x3() {
-        lagaGrid(3);
-    }
-
-    @FXML
-    private void grid4x4() {
-        lagaGrid(4);
-    }
-
-    @FXML
-    private void grid5x5() {
-        lagaGrid(5);
-    }
-
 
     @FXML
     public void initialize() {
@@ -50,20 +36,30 @@ public class PuzzleController {
     private Image selectedImage = null; // Class level variable
 
     private void valinnListi(String item) {
+        onLogin();
         String imagePath = switch (item) {
             case "Kirkjufell" -> "Myndir/kirkjufell.png";
             case "Gleym mér ei" -> "Myndir/gleym_mer_ei.png";
             case "Zebra" -> "Myndir/zebra.png";
             default -> null;
+
         };
 
         if (imagePath != null) {
             selectedImage = new Image(getClass().getResourceAsStream(imagePath));
             myndHeiti.setText(item);
-            lagaGrid(3); // má taka þetta út seinna
+            lagaGrid(erfidleika); // má taka þetta út seinna
         }
     }
-
+    public void onLogin() {
+        DifficultyDialog a = new DifficultyDialog();
+        Difficulty difficulty = a.getDifficultyValue();
+        if (difficulty != null) {
+            erfidleika=difficulty.getValue();
+        } else {
+            System.out.println("notandi hætti við");
+        }
+    }
 
 
     public void lagaGrid(int gridSize) {

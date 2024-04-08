@@ -49,17 +49,17 @@ public class DifficultyDialog extends Dialog<Difficulty> {
         return utkoma.orElse(null);
     }
     public void easy(ActionEvent actionEvent){
-        difficulty.setValue(1);
+        difficulty.setValue(3);
         Node iLagi = getDialogPane().lookupButton(fxILagi);
         iLagi.setDisable(false);
     }
     public void medium(ActionEvent actionEvent){
-        difficulty.setValue(2);
+        difficulty.setValue(4);
         Node iLagi = getDialogPane().lookupButton(fxILagi);
         iLagi.setDisable(false);
     }
     public void hard(ActionEvent actionEvent){
-        difficulty.setValue(3);
+        difficulty.setValue(5);
         Node iLagi = getDialogPane().lookupButton(fxILagi);
         iLagi.setDisable(false);
     }
