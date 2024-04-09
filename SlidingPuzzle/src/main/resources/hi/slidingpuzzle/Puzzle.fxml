@@ -23,14 +23,14 @@
                 <ListView fx:id="Listi" prefHeight="400.0" prefWidth="150.0" style="-fx-border-color: black;" />
             </children>
         </VBox>
-      <HBox alignment="BOTTOM_CENTER" layoutX="150.0" prefHeight="64.0" prefWidth="400.0" spacing="150.0" style="-fx-background-color: grey; -fx-border-color: black;">
-         <children>
-              <Label fx:id="myndHeiti" text="Sliding Puzzle leikur" />
-              <Label fx:id="Timi" text="00:00" />
-         </children>
-         <padding>
-            <Insets bottom="10.0" />
-         </padding>
-      </HBox>
+        <HBox alignment="BOTTOM_CENTER" layoutX="150.0" prefHeight="64.0" prefWidth="400.0" spacing="150.0" style="-fx-background-color: grey; -fx-border-color: black;">
+            <children>
+                <Label fx:id="myndHeiti" text="Sliding Puzzle leikur" />
+                <Label fx:id="Timi" text="00:00" />
+            </children>
+            <padding>
+                <Insets bottom="10.0" />
+            </padding>
+        </HBox>
     </children>
 </Pane>

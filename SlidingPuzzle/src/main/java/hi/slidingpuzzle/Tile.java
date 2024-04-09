@@ -1,13 +1,8 @@
 package hi.slidingpuzzle;
-import hi.slidingpuzzle.PuzzleController;
-import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.image.ImageView;
+
 import javafx.scene.image.Image;
-import javafx.geometry.Insets;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 import static hi.slidingpuzzle.PuzzleController.isComplete;
 
@@ -74,4 +69,3 @@ public class Tile extends Pane {
         return (dx == 1 && dy == 0) || (dx == 0 && dy == 1);
     }
 }
-

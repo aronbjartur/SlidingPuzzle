@@ -1,15 +1,17 @@
 package hi.slidingpuzzle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.*;
-import java.io.IOException;
-import vinnsla.Difficulty;
-import java.util.Optional;
-import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.DialogPane;
+import vinnsla.Difficulty;
+
+import java.io.IOException;
+import java.util.Optional;
 
 public class DifficultyDialog extends Dialog<Difficulty> {
 

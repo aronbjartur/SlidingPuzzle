@@ -1,7 +1,7 @@
 package hi.slidingpuzzle;
 
-
-import javafx.event.ActionEvent;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
@@ -11,17 +11,23 @@ import javafx.scene.image.WritableImage;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
+import javafx.util.Duration;
 import vinnsla.Difficulty;
 
-import java.io.Console;
 import java.util.Random;
 
 public class PuzzleController {
+
+
+    private int elapsedTime = 0;
+    private Timeline gameTimer;
+    @FXML
+    private Label Timi;
     private int erfidleika;
     public static boolean winner =false;
     private double heildarstaerd=300.0;
     public static Tile[][] tiles;
-    private Image selectedImage = null; // Class level variable
+    private Image selectedImage = null;
     @FXML
     private ListView<String> Listi;
     @FXML
@@ -47,11 +53,17 @@ public class PuzzleController {
             default -> null;
         };
 
+        if (gameTimer != null) {
+            gameTimer.stop();
+        }
+        elapsedTime = 0;
+
         if (imagePath != null) {
             selectedImage = new Image(getClass().getResourceAsStream(imagePath),heildarstaerd,heildarstaerd,true,true);
             myndHeiti.setText(item);
             lagaGrid(erfidleika);
         }
+        setupGameTimer();
     }
     public void onLogin() {
         DifficultyDialog a = new DifficultyDialog();
@@ -112,7 +124,27 @@ public class PuzzleController {
         System.out.println("réttir reitir: " + counter + " samtals reitir: " + total);
         if (counter==total) won();
     }
+
+    private void updateGameTime() {
+        if (!winner) {
+            elapsedTime++;
+            int minutes = elapsedTime / 60;
+            int seconds = elapsedTime % 60;
+            Timi.setText(String.format("%02d:%02d", minutes, seconds));
+        } else {
+            gameTimer.stop();
+        }
+    }
+
+
+    private void setupGameTimer() {
+        gameTimer = new Timeline(new KeyFrame(Duration.seconds(1), e -> updateGameTime()));
+        gameTimer.setCycleCount(Timeline.INDEFINITE);
+        gameTimer.play();
+    }
+
     private static void won(){
+
         Alert win = new Alert(Alert.AlertType.INFORMATION);
         win.setTitle("Sigur!");
         win.setHeaderText("Til hamingju!");
@@ -120,6 +152,6 @@ public class PuzzleController {
         win.showAndWait();
         winner=true;
 
+
     }
 }
-
