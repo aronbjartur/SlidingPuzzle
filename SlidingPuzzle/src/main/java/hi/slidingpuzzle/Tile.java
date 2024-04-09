@@ -17,7 +17,7 @@ public class Tile extends Pane {
     public Tile(Image image, boolean isBlank, int x, int y, double tileWidth, double tileHeight) {
         this.x = x;
         this.y = y;
-        originalLocation=x+y;
+        originalLocation=x+y+x*PuzzleController.tiles.length;
         this.isBlank = isBlank;
         setPrefSize(tileWidth, tileHeight);
 
