@@ -144,13 +144,13 @@ public class PuzzleController {
     }
 
     private static void won(){
-
+        winner=true;
         Alert win = new Alert(Alert.AlertType.INFORMATION);
         win.setTitle("Sigur!");
         win.setHeaderText("Til hamingju!");
         win.setContentText("Þú leystir púslið. Viltu ekki prófa aftur með fleiri reitum?");
         win.showAndWait();
-        winner=true;
+
 
 
     }
