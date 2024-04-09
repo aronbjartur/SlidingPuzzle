@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ListView?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
-<?import javafx.scene.layout.VBox?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hi.slidingpuzzle.PuzzleController">
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="550.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="hi.slidingpuzzle.PuzzleController">
     <children>
-        <Label fx:id="myndHeiti" layoutX="200.0" layoutY="30.0" />
-        <Label fx:id="Timi" layoutX="400.0" layoutY="30.0" />
         <GridPane fx:id="Mynd" hgap="1" layoutX="188.0" layoutY="77.0" maxHeight="300.0" maxWidth="300.0" prefHeight="300.0" prefWidth="300.0" vgap="1">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="66.0" />
@@ -26,8 +20,17 @@
         </GridPane>
         <VBox prefHeight="400.0" prefWidth="150.0">
             <children>
-                <ListView fx:id="Listi" prefHeight="400.0" prefWidth="150.0" />
+                <ListView fx:id="Listi" prefHeight="400.0" prefWidth="150.0" style="-fx-border-color: black;" />
             </children>
         </VBox>
+      <HBox alignment="BOTTOM_CENTER" layoutX="150.0" prefHeight="64.0" prefWidth="400.0" spacing="150.0" style="-fx-background-color: grey; -fx-border-color: black;">
+         <children>
+              <Label fx:id="myndHeiti" text="Sliding Puzzle leikur" />
+              <Label fx:id="Timi" text="00:00" />
+         </children>
+         <padding>
+            <Insets bottom="10.0" />
+         </padding>
+      </HBox>
     </children>
 </Pane>

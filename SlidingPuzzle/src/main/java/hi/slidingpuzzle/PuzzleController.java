@@ -18,16 +18,15 @@ import java.util.Random;
 
 public class PuzzleController {
     private int erfidleika;
+    private double heildarstaerd=300.0;
     public static Tile[][] tiles;
+    private Image selectedImage = null; // Class level variable
     @FXML
     private ListView<String> Listi;
-
     @FXML
     public GridPane Mynd;
-
     @FXML
     private Label myndHeiti;
-
     @FXML
     public void initialize() {
         Listi.getItems().addAll("Kirkjufell", "Gleym mér ei", "Zebra");
@@ -38,8 +37,6 @@ public class PuzzleController {
         });
     }
 
-    private Image selectedImage = null; // Class level variable
-
     private void valinnListi(String item) {
         onLogin();
         String imagePath = switch (item) {
@@ -47,13 +44,12 @@ public class PuzzleController {
             case "Gleym mér ei" -> "Myndir/gleym_mer_ei.png";
             case "Zebra" -> "Myndir/zebra.png";
             default -> null;
-
         };
 
         if (imagePath != null) {
-            selectedImage = new Image(getClass().getResourceAsStream(imagePath));
+            selectedImage = new Image(getClass().getResourceAsStream(imagePath),heildarstaerd,heildarstaerd,true,true);
             myndHeiti.setText(item);
-            lagaGrid(erfidleika); // má taka þetta út seinna
+            lagaGrid(erfidleika);
         }
     }
     public void onLogin() {
@@ -72,9 +68,8 @@ public class PuzzleController {
         Mynd.getColumnConstraints().clear();
         Mynd.getRowConstraints().clear();
 
-        double heildarStaerd = 300.0;
-        double tileWidth = heildarStaerd / gridSize;
-        double tileHeight = heildarStaerd / gridSize;
+        double tileWidth = heildarstaerd / gridSize;
+        double tileHeight = heildarstaerd / gridSize;
         tiles=new Tile[gridSize][gridSize];
 
 
