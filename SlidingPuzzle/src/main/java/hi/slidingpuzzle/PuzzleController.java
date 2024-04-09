@@ -116,7 +116,7 @@ public class PuzzleController {
         for (int i = 0; i < n; i++) {
             int m = tiles[i].length;
             for (int j = 0; j < m; j++) {
-                if (tiles[i][j].originalLocation == i+j) {
+                if (tiles[i][j].originalLocation == i+j+i*n) {
                     counter++;
                 }
             }
