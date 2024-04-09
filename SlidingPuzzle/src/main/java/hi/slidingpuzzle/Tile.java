@@ -1,16 +1,18 @@
 package hi.slidingpuzzle;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.geometry.Insets;
+
+import static hi.slidingpuzzle.PuzzleController.isComplete;
 
 public class Tile extends Pane {
     private boolean isBlank;
+    int originalLocation;
     private int x, y;
     private static Tile blankTile;
     private ImageView imageView;
@@ -18,6 +20,7 @@ public class Tile extends Pane {
     public Tile(Image image, boolean isBlank, int x, int y, double tileWidth, double tileHeight) {
         this.x = x;
         this.y = y;
+        originalLocation=x+y;
         this.isBlank = isBlank;
         setPrefSize(tileWidth, tileHeight);
 
@@ -27,7 +30,6 @@ public class Tile extends Pane {
             imageView.setFitHeight(tileHeight);
             getChildren().add(imageView);
             blankTile = this;
-
         } else {
             imageView = new ImageView(image);
             imageView.setFitWidth(tileWidth);
@@ -35,22 +37,29 @@ public class Tile extends Pane {
             getChildren().add(imageView);
         }
 
-        setOnMouseClicked(event -> trySwap());
+        setOnMouseClicked(event -> trySwap(false));
     }
 
-    public void trySwap() {
+    public void trySwap(boolean ai) {
         if (this.isBlank || !isAdjacentToBlank()) return;
 
         Image tempImage = this.imageView.getImage();
+        int tempLocation = this.originalLocation;
         this.imageView.setImage(blankTile.imageView == null ? null : blankTile.imageView.getImage());
+        this.originalLocation= blankTile.originalLocation;
         if (blankTile.imageView != null) {
             blankTile.imageView.setImage(tempImage);
+            blankTile.originalLocation=tempLocation;
         }
 
         this.isBlank = true;
         blankTile.isBlank = false;
 
         blankTile = this;
+        if(!ai){
+            isComplete(PuzzleController.tiles);
+        }
+
     }
 
     private boolean isAdjacentToBlank() {
@@ -61,3 +70,4 @@ public class Tile extends Pane {
 
 
 }
+

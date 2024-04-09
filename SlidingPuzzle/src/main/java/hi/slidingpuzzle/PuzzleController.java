@@ -3,6 +3,7 @@ package hi.slidingpuzzle;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.image.Image;
@@ -12,16 +13,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
 import vinnsla.Difficulty;
 
+import java.io.Console;
 import java.util.Random;
 
 public class PuzzleController {
     private int erfidleika;
-    private Tile[][] tiles;
+    public static Tile[][] tiles;
     @FXML
     private ListView<String> Listi;
 
     @FXML
-    private GridPane Mynd;
+    public GridPane Mynd;
 
     @FXML
     private Label myndHeiti;
@@ -94,15 +96,31 @@ public class PuzzleController {
         for(int i = 0; i < 10000; i++){
             int x = rand.nextInt(gridSize);
             int y = rand.nextInt(gridSize);
-            tiles[x][y].trySwap();
+            tiles[x][y].trySwap(true);
         }
+
     }
-
-
-
-
-
-
-
+    public static void isComplete(Tile[][] tiles) {
+        int n = tiles.length;
+        int counter=0;
+        double total= Math.pow(n,2);
+        for (int i = 0; i < n; i++) {
+            int m = tiles[i].length;
+            for (int j = 0; j < m; j++) {
+                if (tiles[i][j].originalLocation == i+j) {
+                    counter++;
+                }
+            }
+        }
+        System.out.println("réttir reitir: " + counter + " samtals reitir: " + total);
+        if (counter==total) won();
+    }
+    private static void won(){
+        Alert win = new Alert(Alert.AlertType.INFORMATION);
+        win.setTitle("Sigur!");
+        win.setHeaderText("Til hamingju!");
+        win.setContentText("Þú leystir púslið. Viltu ekki prófa aftur með fleiri reitum?");
+        win.showAndWait();
+    }
 }
 
