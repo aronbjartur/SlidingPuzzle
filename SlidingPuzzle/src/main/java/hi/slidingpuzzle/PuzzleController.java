@@ -115,7 +115,7 @@ public class PuzzleController {
         System.out.println("réttir reitir: " + counter + " samtals reitir: " + total);
         if (counter==total) won();
     }
-    private static void won(){
+    private static void won(){ //skipta út fyrir öðrum popup?
         Alert win = new Alert(Alert.AlertType.INFORMATION);
         win.setTitle("Sigur!");
         win.setHeaderText("Til hamingju!");
