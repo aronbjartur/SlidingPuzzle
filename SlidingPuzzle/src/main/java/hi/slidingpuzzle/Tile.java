@@ -1,5 +1,6 @@
 package hi.slidingpuzzle;
-
+import hi.slidingpuzzle.PuzzleController;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.*;
@@ -10,13 +11,14 @@ import javafx.geometry.Insets;
 
 import static hi.slidingpuzzle.PuzzleController.isComplete;
 
+
 public class Tile extends Pane {
     private boolean isBlank;
+    public boolean winner=false;
     int originalLocation;
     private int x, y;
     private static Tile blankTile;
     private ImageView imageView;
-
     public Tile(Image image, boolean isBlank, int x, int y, double tileWidth, double tileHeight) {
         this.x = x;
         this.y = y;
@@ -41,7 +43,9 @@ public class Tile extends Pane {
     }
 
     public void trySwap(boolean ai) {
+        if(PuzzleController.winner) return;
         if (this.isBlank || !isAdjacentToBlank()) return;
+
 
         Image tempImage = this.imageView.getImage();
         int tempLocation = this.originalLocation;
@@ -67,7 +71,5 @@ public class Tile extends Pane {
         int dy = Math.abs(this.y - blankTile.y);
         return (dx == 1 && dy == 0) || (dx == 0 && dy == 1);
     }
-
-
 }
 

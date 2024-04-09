@@ -18,6 +18,7 @@ import java.util.Random;
 
 public class PuzzleController {
     private int erfidleika;
+    public static boolean winner =false;
     private double heildarstaerd=300.0;
     public static Tile[][] tiles;
     private Image selectedImage = null; // Class level variable
@@ -110,12 +111,14 @@ public class PuzzleController {
         System.out.println("réttir reitir: " + counter + " samtals reitir: " + total);
         if (counter==total) won();
     }
-    private static void won(){ //skipta út fyrir öðrum popup?
+    private static void won(){
         Alert win = new Alert(Alert.AlertType.INFORMATION);
         win.setTitle("Sigur!");
         win.setHeaderText("Til hamingju!");
         win.setContentText("Þú leystir púslið. Viltu ekki prófa aftur með fleiri reitum?");
         win.showAndWait();
+        winner=true;
+
     }
 }
 
