@@ -43,7 +43,9 @@ public class Tile extends Pane {
     }
 
     public void trySwap(boolean ai) {
-        if(PuzzleController.winner) return;
+        if(!ai){
+            if(PuzzleController.winner) return;
+        }
         if (this.isBlank || !isAdjacentToBlank()) return;
 
 

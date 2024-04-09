@@ -58,6 +58,7 @@ public class PuzzleController {
         Difficulty difficulty = a.getDifficultyValue();
         if (difficulty != null) {
             erfidleika=difficulty.getValue();
+            winner=false;
         } else {
             System.out.println("notandi hætti við");
         }
