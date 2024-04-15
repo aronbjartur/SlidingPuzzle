@@ -14,6 +14,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.util.Duration;
 import vinnsla.Difficulty;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class PuzzleController {
@@ -23,7 +24,7 @@ public class PuzzleController {
     private Timeline gameTimer;
     @FXML
     private Label Timi;
-    private int erfidleika;
+    private int erfidleika=0;
     public static boolean winner =false;
     private double heildarstaerd=300.0;
     public static Tile[][] tiles;
@@ -46,6 +47,9 @@ public class PuzzleController {
 
     private void valinnListi(String item) {
         onLogin();
+        if (erfidleika==0){
+            return;
+        }
         String imagePath = switch (item) {
             case "Kirkjufell" -> "Myndir/kirkjufell.png";
             case "Gleym mér ei" -> "Myndir/gleym_mer_ei.png";
@@ -59,20 +63,19 @@ public class PuzzleController {
         elapsedTime = 0;
 
         if (imagePath != null) {
-            selectedImage = new Image(getClass().getResourceAsStream(imagePath),heildarstaerd,heildarstaerd,true,true);
+            selectedImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)),heildarstaerd,heildarstaerd,true,true);
             myndHeiti.setText(item);
             lagaGrid(erfidleika);
         }
         setupGameTimer();
     }
     public void onLogin() {
+        erfidleika=0;
         DifficultyDialog a = new DifficultyDialog();
         Difficulty difficulty = a.getDifficultyValue();
         if (difficulty != null) {
             erfidleika=difficulty.getValue();
             winner=false;
-        } else {
-            System.out.println("notandi hætti við");
         }
     }
 
