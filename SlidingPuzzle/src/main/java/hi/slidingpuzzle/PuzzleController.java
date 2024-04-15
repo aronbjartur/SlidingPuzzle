@@ -124,7 +124,6 @@ public class PuzzleController {
                 }
             }
         }
-        System.out.println("réttir reitir: " + counter + " samtals reitir: " + total);
         if (counter==total) won();
     }
 
