@@ -39,14 +39,15 @@ public class PuzzleController {
     public void initialize() {
         Listi.getItems().addAll("Kirkjufell", "Gleym mér ei", "Zebra");
 
-
         Listi.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("old: " + oldValue + " new: " + newValue);
             valinnListi(newValue);
         });
     }
 
     private void valinnListi(String item) {
         onLogin();
+
         if (erfidleika==0){
             return;
         }
