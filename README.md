@@ -1,5 +1,5 @@
 # Sliding Puzzle
-Útgáfa 0.01
+Útgáfa 1.01
 
 ## Hvernig á að spila
 byrjar á að velja mynd  úr listanum og velur svo erfiðleikastig.
