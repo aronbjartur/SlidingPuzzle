@@ -38,10 +38,13 @@ public class PuzzleController {
     @FXML
     public void initialize() {
         Listi.getItems().addAll("Kirkjufell", "Gleym mér ei", "Zebra");
-
         Listi.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-
-            valinnListi(newValue);
+            if (newValue != null) {
+                valinnListi(newValue);
+                Platform.runLater(() -> {
+                    Listi.getSelectionModel().clearSelection();
+                });
+            }
         });
     }
 
